@@ -1,0 +1,41 @@
+ganache-cli -m plasma_cash -i 5777 -d
+truffle migrate --network rpc --reset
+FLASK_APP=./child_chain FLASK_ENV=development flask run --port=8546
+
+# Demo
+$ python demo.py
+Alice has 5 tokens ERC721
+Bob has 0 tokens
+Charlie has 0 tokens
+
+ALICE EVENT DATA1 AttributeDict({'slot': 18430364436319981706, 'from': '0xb83e232458A092696bE9717045d9A605FB0FEc2b', 'contractAddress': '0xDa0A9016BD3989A53AE7CF677829b85f5692fD61', 'blockNumber': 1, 'denomination': 1})
+
+ALICE EVENT DATA2 AttributeDict({'slot': 1816528359929916630, 'from': '0xb83e232458A092696bE9717045d9A605FB0FEc2b', 'contractAddress': '0xDa0A9016BD3989A53AE7CF677829b85f5692fD61', 'blockNumber': 2, 'denomination': 1})
+
+ALICE EVENT DATA3 AttributeDict({'slot': 4669084257373735840, 'from': '0xb83e232458A092696bE9717045d9A605FB0FEc2b', 'contractAddress': '0xDa0A9016BD3989A53AE7CF677829b85f5692fD61', 'blockNumber': 3, 'denomination': 1})
+
+EXIT DETECTED by 0xDF29cFbD5d793Fa5B22D5c730A8E8450740C6f8f -- slot: 4669084257373735840, owner: 0xDF29cFbD5d793Fa5B22D5c730A8E8450740C6f8f
+valid exit
+
+Alice has 2 tokens ERC721
+Bob has 0 tokens
+Charlie has 1 tokens ERC721
+Plasma Cash with ERC721 tokens success :)
+
+# Plasma chain
+127.0.0.1 - - [31/Jul/2018 16:02:36] "POST /send_tx HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:36] "POST /send_tx HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:36] "POST /submit_block HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:37] "POST /submit_block HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:37] "POST /send_tx HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:37] "GET /blocknumber HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:37] "GET /tx_proof?blknum=3&slot=4669084257373735840 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:37] "GET /tx_proof?blknum=1000&slot=4669084257373735840 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:38] "GET /tx_proof?blknum=2000&slot=4669084257373735840 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:38] "GET /blocknumber HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:38] "GET /tx?blknum=3&slot=4669084257373735840 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:38] "GET /tx?blknum=1000&slot=4669084257373735840 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:39] "POST /submit_block HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:39] "GET /tx_proof?blknum=3000&slot=4669084257373735840 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2018 16:02:39] "GET /tx_proof?blknum=1000&slot=4669084257373735840 HTTP/1.1" 200 -
+
